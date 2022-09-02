@@ -2659,7 +2659,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 182913205}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1951403449}
+        m_MethodName: KillThemAll
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &182913205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17605,7 +17616,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1756225950}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1951403449}
+        m_MethodName: ClearTheDead
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1756225950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19710,7 +19732,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1951403444}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -19719,10 +19741,10 @@ RectTransform:
   m_Father: {fileID: 1148608718}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 127.4, y: -125.8}
-  m_SizeDelta: {x: 294.24072, y: 251.57114}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 1244, y: 423}
+  m_SizeDelta: {x: 308.3855, y: 263.08667}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1951403446
 MonoBehaviour:
@@ -19796,6 +19818,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be49f20b9ed749a4d8e519963d88b004, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _aliveRed: {fileID: 1936056197}
+  _aliveGreen: {fileID: 1170716327}
+  _aliveBlue: {fileID: 2010289370}
+  _killedRed: {fileID: 696937119}
+  _killedGreen: {fileID: 1986513275}
+  _killedBlue: {fileID: 1148895471}
 --- !u!1 &1956478681
 GameObject:
   m_ObjectHideFlags: 0

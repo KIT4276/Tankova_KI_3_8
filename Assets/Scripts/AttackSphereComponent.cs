@@ -16,7 +16,7 @@ namespace Ziggurat
                 EnemyCheck(_collider.gameObject.GetComponent<SoldierController>().ColorTypeDefinition()))
             {
                 _enemy = _collider.gameObject;
-                Debug.Log("враг - " + _collider.gameObject.name);
+                //Debug.Log("враг - " + _collider.gameObject.name);
             }
         }
         private bool EnemyCheck(ColorType colliderColorType)

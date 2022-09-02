@@ -104,12 +104,13 @@ namespace Ziggurat
 
         private void ActivePanel(Transform gate)
         {
-                if (gate == _greenGates.transform) _activePanel = _greenPanel;
-                if (gate == _redGates.transform) _activePanel = _redPanel;
-                if (gate == _blueGates.transform) _activePanel = _bluePanel;
+            if (gate == _greenGates.transform) _activePanel = _greenPanel;
+            else if (gate == _redGates.transform) _activePanel = _redPanel;
+            else if (gate == _blueGates.transform) _activePanel = _bluePanel;
+            else _activePanel = _infoPanel;
+            Debug.Log("фктивная панель  " + _activePanel);
 
-                _gateName = gate.name;// убрать, не используется
-                OpenPanel();
+            if(_activePanel != _infoPanel) OpenPanel();
         }
 
         //private void SelectionSolder(Transform solder)

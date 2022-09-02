@@ -13,13 +13,13 @@ namespace Ziggurat
 
     public class SoldierController : MonoBehaviour
     {
-        protected Vector3 _destination; //= new Vector3 (0f,2f,0f);
+        protected Vector3 _destination;
         protected GameObject _enemy = null;
         private GameObject _gameManager;
         private GameObject _alertSphere = null;
         private bool _isShowHP = false;
 
-        private float _health = 100f;
+        protected float _health = 100f;
         private float _speed = 5f;
         private float _fastDamage = 3f;
         private float _strongDamage = 6f;
@@ -52,6 +52,7 @@ namespace Ziggurat
         private void LateUpdate()
         {
             ReadingSettingFromConsole();
+            CheckHealth();
         }
 
         public ColorType ColorTypeDefinition()
@@ -104,17 +105,8 @@ namespace Ziggurat
 
         private void ReadingSettingFromConsole()
         {
-            if (this.GetComponent<GreenSoldierController>() != null)
-            {
-                _health = Settings._healthGreen;
-                _speed = Settings._speedGreen;
-                _fastDamage = Settings._fastDamageGreen;
-                _strongDamage = Settings._strongDamageGreen;
-                _missProbability = Settings._missProbabilityGreen;
-                _critProbability = Settings._critProbabilityGreen;
-                _strongAttackProbability = Settings._strongAttackProbabilityGreen;
-            }
-            else if (this.GetComponent<RedSoldierController>() != null)
+
+            if (this.GetComponent<RedSoldierController>() != null)
             {
                 _health = Settings._healthRed;
                 _speed = Settings._speedRed;
@@ -124,6 +116,18 @@ namespace Ziggurat
                 _critProbability = Settings._critProbabilityRed;
                 _strongAttackProbability = Settings._strongAttackProbabilityRed;
             }
+
+            else if(this.GetComponent<GreenSoldierController>() != null)
+            {
+                _health = Settings._healthGreen;
+                _speed = Settings._speedGreen;
+                _fastDamage = Settings._fastDamageGreen;
+                _strongDamage = Settings._strongDamageGreen;
+                _missProbability = Settings._missProbabilityGreen;
+                _critProbability = Settings._critProbabilityGreen;
+                _strongAttackProbability = Settings._strongAttackProbabilityGreen;
+            }
+             
             else if (this.GetComponent<BlueSoldierController>() != null )
             {
                 _health = Settings._healthBlue;
@@ -149,7 +153,6 @@ namespace Ziggurat
         {
             if (_enemy != null)
             {
-                //Debug.Log("_enemy != null");
                 _destination = _enemy.transform.position;
             }
 
@@ -219,7 +222,6 @@ namespace Ziggurat
                 if (random < _critProbability) _health -= damageType * 2;
                 else _health -= damageType;
             }
-            else _health -= 0;
 
             CheckHealth();
         }
@@ -229,8 +231,23 @@ namespace Ziggurat
             if (_health <= 0)
             {
                 StopCoroutine(AttackCoroutine());
-                this.gameObject.GetComponent<UnitEnvironment>().StartAnimation("Die");
+                Die();
             }
+        }
+
+        public void KillThemAll()
+        {
+            StopAllCoroutines();
+            Die();
+        }
+
+        private void Die()
+        {
+            this.gameObject.GetComponent<UnitEnvironment>().StartAnimation("Die");
+
+            if (this is RedSoldierController) InfoPanelManager.Self.SetKilledeRed();
+            if (this is GreenSoldierController) InfoPanelManager.Self.SetKilledeGreen();
+            if (this is BlueSoldierController) InfoPanelManager.Self.SetKilledeBlue();
         }
 
         private bool DefinitionChanceStrongAttack()
