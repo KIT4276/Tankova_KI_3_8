@@ -9,7 +9,7 @@ namespace Ziggurat
 
         private void Awake()
         {
-            string redPath = "Model/SoldersPresabs/SoldierRed";
+            string redPath = "Model/SoldersPrefabs/SoldierRed";
             _redSoldier = Resources.Load<GameObject>(redPath);
         }
         void Start()

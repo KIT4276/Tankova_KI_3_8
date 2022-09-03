@@ -10,6 +10,5 @@ namespace Ziggurat
         {
             _destination = new Vector3(0, 2, 4);
         }
-
     }
 }

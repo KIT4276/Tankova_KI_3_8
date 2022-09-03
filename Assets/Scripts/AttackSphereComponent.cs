@@ -10,29 +10,15 @@ namespace Ziggurat
 
         private void OnTriggerEnter(Collider _collider)
         {
-            
-
             if (_collider.gameObject.GetComponent<SoldierController>() != null && 
                 EnemyCheck(_collider.gameObject.GetComponent<SoldierController>().ColorTypeDefinition()))
-            {
                 _enemy = _collider.gameObject;
-                //Debug.Log("враг - " + _collider.gameObject.name);
-            }
         }
         private bool EnemyCheck(ColorType colliderColorType)
         {
-            
-            //if (((colorType == ColorType.Red) || (colorType == ColorType.Red) || (colorType == ColorType.Red)) &&
-                if(colliderColorType != transform.parent.gameObject.GetComponent<SoldierController>().ColorTypeDefinition())
-            {
-                //Debug.Log("Enemy Check true");
-                return true;
-            }
-            else
-            {
-                //Debug.Log("Enemy Check false");
-                return false;
-            }
+            if(colliderColorType != transform.parent.gameObject.GetComponent<SoldierController>().ColorTypeDefinition())
+                 return true;
+            else return false;
         }
     }
 }

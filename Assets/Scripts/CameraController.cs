@@ -20,7 +20,6 @@ namespace Ziggurat
         private void Awake()
         {
             _controls = new Ziggurat.Controls();
-            //_controls.Camera.Select.performed += OnLeftClic;
             _controls.Camera.ActivateRotation.performed += OnActivateRotation;
             _controls.Camera.ActivateRotation.canceled += OnActivateRotation;
         }
@@ -60,12 +59,6 @@ namespace Ziggurat
             transform.eulerAngles = angle;
         }
 
-        //private void OnLeftClic(InputAction.CallbackContext context)
-        //{
-        //    Debug.Log("OnLeftClic");
-        //    GetRaycastPoint();
-        //}
-
         private void OnActivateRotation(InputAction.CallbackContext context)
         {
             _activeRotate = context.performed;
@@ -76,8 +69,6 @@ namespace Ziggurat
        
         private Vector3? GetRaycastPoint()
         {
-            Debug.Log("GetRaycastPoint");
-
             var ray = _camera.ScreenPointToRay(Mouse.current.position.ReadValue());
 
             if (Physics.Raycast(ray, out var hit, _gatesMask))

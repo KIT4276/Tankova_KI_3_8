@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Ziggurat
 {
@@ -30,6 +31,11 @@ namespace Ziggurat
         private ColorType _unfriendlyColor1;
         private ColorType _unfriendlyColor2;
 
+        [SerializeField] 
+        private Canvas _healthCanvas;
+        [SerializeField] 
+        private Slider _healthSlider;
+
         //Корутина удара
         Coroutine _attack = null;
 
@@ -37,8 +43,10 @@ namespace Ziggurat
 
         private void Awake()
         {
+            //_camera = Camera.main;
             _alertSphere = this.transform.Find("Sphere").gameObject;
             _colorType = ColorTypeDefinition();
+            
             ReadingSettingFromConsole();
             StartCoroutine(Move());
         }
@@ -51,6 +59,8 @@ namespace Ziggurat
 
         private void LateUpdate()
         {
+            _isShowHP = InfoPanelManager.Self.IsShowingHealth();
+            if (_isShowHP) ShowHealth();
             ReadingSettingFromConsole();
             CheckHealth();
         }
@@ -177,10 +187,8 @@ namespace Ziggurat
             else
             {
                 this.gameObject.GetComponent<UnitEnvironment>().Moving(1f);
-                //this.GetComponent<Rigidbody>().velocity = this.transform.forward * _speed;
 
                 var step = _speed * Time.deltaTime;
-                //var moveTarget = Opponent != null ? Opponent.transform : _defaultMoveTarget;
                 transform.position = Vector3.MoveTowards(transform.position, _destination, step);
             }
         }
@@ -256,6 +264,16 @@ namespace Ziggurat
 
             if (random > _strongAttackProbability) return false;
             else return true;
+        }
+
+        public void ShowHealth()
+        {
+            if (_isShowHP)
+            {
+                _healthCanvas.transform.LookAt(Camera.main.transform.position);
+                _healthCanvas.gameObject.SetActive(true);
+                _healthSlider.value = _health;
+            }
         }
     }
 }

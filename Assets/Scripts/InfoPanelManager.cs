@@ -25,6 +25,8 @@ namespace Ziggurat
         private int killedGreen;
         private int killedBlue;
 
+        private bool _isShowingHealth = false;
+
         public static InfoPanelManager Self;
 
         private void Start()
@@ -36,6 +38,14 @@ namespace Ziggurat
         {
             FindAllAlive();
             SetAllKilled();
+        }
+
+        public bool IsShowingHealth() => _isShowingHealth;
+
+        public void ToShowHP()
+        {
+            if (!_isShowingHealth) _isShowingHealth = true;
+            else _isShowingHealth = false;
         }
 
         private void FindAllAlive()

@@ -7,10 +7,10 @@ namespace Ziggurat
 {
     public class Settings : MonoBehaviour
     {
-        #region "Variable block"
-        
-        //Red units
-        public static float _healthRed = 6f;
+        #region Parametrs
+
+        //Red
+        public static float _healthRed = 30f;
         public static float _speedRed = 3f;
         public static float _fastDamageRed = 3f;
         public static float _strongDamageRed = 6f;
@@ -18,8 +18,8 @@ namespace Ziggurat
         public static float _critProbabilityRed = 0.1f;
         public static float _strongAttackProbabilityRed = 0.2f;
 
-        //Green units
-        public static float _healthGreen = 6f;
+        //Green
+        public static float _healthGreen = 30f;
         public static float _speedGreen = 3f;
         public static float _fastDamageGreen = 3f;
         public static float _strongDamageGreen = 6f;
@@ -27,8 +27,8 @@ namespace Ziggurat
         public static float _critProbabilityGreen = 0.1f;
         public static float _strongAttackProbabilityGreen = 0.2f;
 
-        //Blue units
-        public static float _healthBlue = 6f;
+        //Blue
+        public static float _healthBlue = 30f;
         public static float _speedBlue = 3f;
         public static float _fastDamageBlue = 3f;
         public static float _strongDamageBlue = 6f;
@@ -37,8 +37,8 @@ namespace Ziggurat
         public static float _strongAttackProbabilityBlue = 0.5f;
         #endregion
 
-        #region "Sliders block"
-        
+        #region Sliders
+
         //Red units
         [SerializeField]
         Slider _redHealthSlider;
@@ -88,7 +88,8 @@ namespace Ziggurat
         Slider _blueStrongAttackSlider;
         #endregion
 
-        #region "Block for changing the red units parameters"
+        #region Changing the red parameters
+
         public void SetHealthRed()
         {
             _healthRed = _redHealthSlider.value;
@@ -122,7 +123,8 @@ namespace Ziggurat
         }
         #endregion
 
-        #region "Block for changing the green units parameters"
+        #region Changing the green parameters
+        
         public void SetHealthGreen()
         {
             _healthGreen = _greenHealthSlider.value;
@@ -157,7 +159,8 @@ namespace Ziggurat
 
         #endregion
 
-        #region "Block for changing the blue units parameters"
+        #region Changing the blue parameters
+
         public void SetHealthBlue()
         {
             _healthBlue = _blueHealthSlider.value;

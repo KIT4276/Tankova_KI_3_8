@@ -71,10 +71,9 @@ namespace Ziggurat
         private void OnLeftClic(InputAction.CallbackContext context) 
         {
             _activeGate = GetRaycastPoint();
-            //activeSolder = GetRaycastPointForSolder();
         }
 
-        private Transform GetRaycastPoint() //  работает некорректно, а другого способа я не знаю
+        private Transform GetRaycastPoint() 
         {
             var ray = _camera.ScreenPointToRay(Mouse.current.position.ReadValue());
 
@@ -88,35 +87,16 @@ namespace Ziggurat
             return null;
         }
 
-        //private Transform GetRaycastPointForSolder() //  работает некорректно. почему?
-        //{
-        //    var ray = _camera.ScreenPointToRay(Mouse.current.position.ReadValue());
-
-        //    if (Physics.Raycast(ray, out var hit, _solderMask))
-        //    {
-        //        Debug.Log("Выделен солдатик");
-        //        SelectionSolder(hit.transform);
-        //        return hit.transform;
-        //    }
-        //    return null;
-        //}
-
-
         private void ActivePanel(Transform gate)
         {
             if (gate == _greenGates.transform) _activePanel = _greenPanel;
             else if (gate == _redGates.transform) _activePanel = _redPanel;
             else if (gate == _blueGates.transform) _activePanel = _bluePanel;
             else _activePanel = _infoPanel;
-            Debug.Log("фктивная панель  " + _activePanel);
+            Debug.Log("активная панель  " + _activePanel);
 
             if(_activePanel != _infoPanel) OpenPanel();
         }
-
-        //private void SelectionSolder(Transform solder)
-        //{
-        //    //todo
-        //}
 
         public void OpenPanel()
         {
@@ -169,41 +149,6 @@ namespace Ziggurat
             }
             _activePanel.GetComponent<RectTransform>().transform.position = targetToMove;
         }
-
-        //private void OnClickGate(string _gateName)
-        //{
-        //    Debug.Log("OnClickGate");
-        //    if (_gateName == "Gate_Green")
-        //    {
-        //        Debug.Log("Сработало событие клика на зелёные ворота");
-        //    }
-        //    if (_gateName == "Gate_Red")
-        //    {
-        //        Debug.Log("Сработало событие клика на красные ворота");
-        //    }
-        //    if (_gateName == "Gate_Blue")
-        //    {
-        //        Debug.Log("Сработало событие клика на синие ворота");
-        //    }
-        //    else
-        //    {
-        //        Debug.Log("Произошло что-то непонятное в событии клика на ворота");
-        //    }
-        //}
-
-        //public void AllButtonsTurnOff()
-        //{
-        //    _greenPanelCloseButton.interactable = false;
-        //    _redPanelCloseButton.interactable = false;
-        //    _bluePanelCloseButton.interactable = false;
-        //}
-
-        //public void AllButtonsTurnOn()
-        //{
-        //    _greenPanelCloseButton.interactable = true;
-        //    _redPanelCloseButton.interactable = true;
-        //    _bluePanelCloseButton.interactable = true;
-        //}
 
         private void OnEnable() => _controls.Camera.Enable();
 
