@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -8,9 +6,6 @@ namespace Ziggurat
 {
     public class PanelManager : BasePanelManager
     {
-        //[SerializeField, Tooltip("Panel move speed")]
-        //private float _moveSpeed;
-
         [Header("Gates"), SerializeField, Tooltip("GreenGates")]
         private GameObject _greenGates;
         [SerializeField, Tooltip("RedGates")]
@@ -24,8 +19,6 @@ namespace Ziggurat
         protected GameObject _redPanel;
         [SerializeField, Tooltip("BluePanel")]
         protected GameObject _bluePanel;
-        //[Space, SerializeField]
-        //private GameObject _infoPanel;
 
         [Header("Panel close buttons"), SerializeField, Tooltip("GreenPanelCloseButton")]
         private Button _greenPanelCloseButton;
@@ -34,33 +27,15 @@ namespace Ziggurat
         [SerializeField, Tooltip("BluePanelCloseButton")]
         private Button _bluePanelCloseButton;
 
-        //[Header("Camera"), SerializeField]
-        //private Camera _camera;
-
         protected GameObject _activePanel;
         private Transform _activeGate;
-        private Transform _activeSolder;
-        //private bool _panelIsOpened = false;
-        //private bool _infoPanelIsOpened = false;
-        //private Ziggurat.Controls _controls;
+        //private Transform _activeSolder;
         private Vector2 _zeroPosition;
-        //private Vector2 _zeroInfoPosition;
         private Vector2 _finitePosition;
-        //private Vector2 _finiteInfoPosition;
         private LayerMask _gatesMask;
         private LayerMask _solderMask;
         private string _gateName;
         
-
-        private void Awake()
-        {
-            //_controls = new Ziggurat.Controls();
-            //_controls.Camera.Select.performed += OnLeftClic;
-            
-            //_zeroInfoPosition = _infoPanel.GetComponent<RectTransform>().transform.position;
-            //_finiteInfoPosition = new Vector2(1100, _infoPanel.transform.position.y);
-        }
-
         private void Start()
         {
             _controls = new Controls();
@@ -74,11 +49,7 @@ namespace Ziggurat
             _solderMask = LayerMask.GetMask("SolderMask");
         }
 
-        private void OnLeftClic(InputAction.CallbackContext context)
-        {
-            _activeGate = GetRaycastPoint();
-            Debug.Log("OnLeftClic");
-        }
+        private void OnLeftClic(InputAction.CallbackContext context) => _activeGate = GetRaycastPoint();
 
         private Transform GetRaycastPoint() 
         {
@@ -105,11 +76,14 @@ namespace Ziggurat
 
         public void OpenPanel()
         {
-            if (_panelIsOpened) ClosePanel();
-            else
+            if (_activePanel != null)
             {
-                StartCoroutine(MoveFromTo(_finitePosition, _activePanel));
-                _panelIsOpened = true;
+                if (_panelIsOpened) ClosePanel();
+                else
+                {
+                    StartCoroutine(MoveFromTo(_finitePosition, _activePanel));
+                    _panelIsOpened = true;
+                }
             }
         }
 
@@ -121,45 +95,7 @@ namespace Ziggurat
                 StartCoroutine(MoveFromTo(_zeroPosition, _activePanel));
                 _panelIsOpened = false;
             }
+            _activePanel = null;
         }
-
-        //public void OpenInfoPanel()
-        //{
-        //    _activePanel = _infoPanel;
-        //    if (_infoPanelIsOpened) CloseInfoPanel();
-        //    else
-        //    {
-        //        StartCoroutine(MoveFromTo(_finiteInfoPosition));
-        //        _infoPanelIsOpened = true;
-        //    }
-        //}
-
-        //public void CloseInfoPanel()
-        //{
-        //    StartCoroutine(MoveFromTo(_zeroInfoPosition));
-        //    _infoPanelIsOpened = false;
-        //}
-
-        //private IEnumerator MoveFromTo(Vector2 targetToMove)
-        //{
-        //    var currentTime = 0f;
-        //    var startPos = _activePanel.GetComponent<RectTransform>().transform.position;
-        //    targetToMove = new Vector2(targetToMove.x, targetToMove.y);
-
-        //    while (currentTime < 2)
-        //    {
-        //        _activePanel.GetComponent<RectTransform>().transform.position = Vector2.Lerp(startPos, targetToMove, currentTime / 2);
-        //        currentTime += _moveSpeed * Time.deltaTime;
-        //        yield return null;
-        //    }
-        //    _activePanel.GetComponent<RectTransform>().transform.position = targetToMove;
-        //}
-
-
-        //private void OnEnable() => _controls.Camera.Enable();
-
-        //private void OnDisable() => _controls.Camera.Disable();
-
-        //private void OnDestroy() => _controls.Dispose();
     }
 }

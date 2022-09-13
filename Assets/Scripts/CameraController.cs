@@ -12,9 +12,8 @@ namespace Ziggurat
         [SerializeField, Range(0.1f, 100f)]
         private float _upDownSpeed = 5f;
 
-        private Ziggurat.Controls _controls;
+        private Controls _controls;
         private Camera _camera;
-        private LayerMask _gatesMask;
         private bool _activeRotate;
 
         private void Awake()
@@ -24,11 +23,8 @@ namespace Ziggurat
             _controls.Camera.ActivateRotation.canceled += OnActivateRotation;
         }
 
-        private void Start()
-        {
-            _camera = GetComponent<Camera>();
-            _gatesMask = LayerMask.GetMask("GatesMask");
-        }
+        private void Start() => _camera = GetComponent<Camera>();
+
         private void Update()
         {
             OnMoveAndRotate();
@@ -65,18 +61,6 @@ namespace Ziggurat
 
             if (_activeRotate) Cursor.lockState = CursorLockMode.Locked;
             else Cursor.lockState = CursorLockMode.None;
-        }
-       
-        private Vector3? GetRaycastPoint()
-        {
-            var ray = _camera.ScreenPointToRay(Mouse.current.position.ReadValue());
-
-            if (Physics.Raycast(ray, out var hit, _gatesMask))
-            {
-                Debug.Log(hit.point);
-                return hit.point;
-            }
-            return null;
         }
 
         private void OnEnable() => _controls.Camera.Enable();

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace Ziggurat
@@ -90,109 +88,55 @@ namespace Ziggurat
 
         #region Changing the red parameters
 
-        public void SetHealthRed()
-        {
-            Debug.Log("SetHealthRed");
-            _maxHealthRed = _redHealthSlider.value;
-        }
+        public void SetHealthRed() => _maxHealthRed = _redHealthSlider.value;
 
-        public void SetSpeedRed()
-        {
-            _speedRed = _redSpeedSlider.value;
-        }
+        public void SetSpeedRed() => _speedRed = _redSpeedSlider.value;
 
-        public void SetFastAttackDamageRed()
-        {
-            _fastDamageRed = _redFastAttackDamageSlider.value;
-        }
+        public void SetFastAttackDamageRed() => _fastDamageRed = _redFastAttackDamageSlider.value;
 
-        public void SetStrongAttackDamageRed()
-        {
-            _strongDamageRed = _redStrongAttackDamageSlider.value;
-        }
-        public void SetMissRed()
-        {
-            _missProbabilityRed = _redMissSlider.value;
-        }
-        public void SetCritRed()
-        {
-            _critProbabilityRed = _redCritSlider.value;
-        }
-        public void SetStrongAttackRed()
-        {
-            _strongAttackProbabilityRed = _redStrongAttackSlider.value;
-        }
+        public void SetStrongAttackDamageRed() => _strongDamageRed = _redStrongAttackDamageSlider.value;
+
+        public void SetMissRed() => _missProbabilityRed = _redMissSlider.value;
+
+        public void SetCritRed() => _critProbabilityRed = _redCritSlider.value;
+
+        public void SetStrongAttackRed() => _strongAttackProbabilityRed = _redStrongAttackSlider.value;
+
         #endregion
 
         #region Changing the green parameters
         
-        public void SetHealthGreen()
-        {
-            _maxHealthGreen = _greenHealthSlider.value;
-        }
+        public void SetHealthGreen() => _maxHealthGreen = _greenHealthSlider.value;
 
-        public void SetSpeedGreen()
-        {
-            _speedGreen = _greenSpeedSlider.value;
-        }
+        public void SetSpeedGreen() => _speedGreen = _greenSpeedSlider.value;
 
-        public void SetFastAttackDamageGreen()
-        {
-            _fastDamageGreen = _greenFastAttackDamageSlider.value;
-        }
+        public void SetFastAttackDamageGreen() => _fastDamageGreen = _greenFastAttackDamageSlider.value;
 
-        public void SetStrongAttackDamageGreen()
-        {
-            _strongDamageGreen = _greenStrongAttackDamageSlider.value;
-        }
-        public void SetMissGreen()
-        {
-            _missProbabilityGreen = _greenMissSlider.value;
-        }
-        public void SetCritGreen()
-        {
-            _critProbabilityGreen = _greenCritSlider.value;
-        }
-        public void SetStrongAttackGreen()
-        {
-            _strongAttackProbabilityGreen = _greenStrongAttackSlider.value;
-        }
+        public void SetStrongAttackDamageGreen() => _strongDamageGreen = _greenStrongAttackDamageSlider.value;
+
+        public void SetMissGreen() => _missProbabilityGreen = _greenMissSlider.value;
+
+        public void SetCritGreen() => _critProbabilityGreen = _greenCritSlider.value;
+
+        public void SetStrongAttackGreen() => _strongAttackProbabilityGreen = _greenStrongAttackSlider.value;
 
         #endregion
 
         #region Changing the blue parameters
 
-        public void SetHealthBlue()
-        {
-            _maxHealthBlue = _blueHealthSlider.value;
-        }
+        public void SetHealthBlue() => _maxHealthBlue = _blueHealthSlider.value;
 
-        public void SetSpeedBlue()
-        {
-            _speedBlue = _blueSpeedSlider.value;
-        }
+        public void SetSpeedBlue() => _speedBlue = _blueSpeedSlider.value;
 
-        public void SetFastAttackDamageBlue()
-        {
-            _fastDamageBlue = _blueFastAttackDamageSlider.value;
-        }
+        public void SetFastAttackDamageBlue() => _fastDamageBlue = _blueFastAttackDamageSlider.value;
 
-        public void SetStrongAttackDamageBlue()
-        {
-            _strongDamageBlue = _blueStrongAttackDamageSlider.value;
-        }
-        public void SetMissBlue()
-        {
-            _missProbabilityBlue = _blueMissSlider.value;
-        }
-        public void SetCritBlue()
-        {
-            _critProbabilityBlue = _blueCritSlider.value;
-        }
-        public void SetStrongAttackBlue()
-        {
-            _strongAttackProbabilityBlue = _blueStrongAttackSlider.value;
-        }
+        public void SetStrongAttackDamageBlue() => _strongDamageBlue = _blueStrongAttackDamageSlider.value;
+
+        public void SetMissBlue() => _missProbabilityBlue = _blueMissSlider.value;
+
+        public void SetCritBlue() => _critProbabilityBlue = _blueCritSlider.value;
+
+        public void SetStrongAttackBlue() => _strongAttackProbabilityBlue = _blueStrongAttackSlider.value;
         #endregion
     }
 }

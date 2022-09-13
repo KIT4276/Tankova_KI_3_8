@@ -1,6 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Ziggurat
@@ -12,11 +13,11 @@ namespace Ziggurat
         Blue
     }
 
-    public class SoldierController : MonoBehaviour
+    public class SoldierController : MonoBehaviour, IPointerClickHandler
     {
         protected Vector3 _destination = new Vector3(0,2,0);
         protected GameObject _enemy = null;
-        private GameObject _gameManager;
+        //private GameObject _gameManager;
         private GameObject _alertSphere = null;
         private bool _isShowHP = false;
 
@@ -32,7 +33,6 @@ namespace Ziggurat
         private ColorType _unfriendlyColor1;
         private ColorType _unfriendlyColor2;
 
-
         [SerializeField] 
         private Canvas _healthCanvas;
         [SerializeField] 
@@ -40,13 +40,17 @@ namespace Ziggurat
 
         [Space, SerializeField]
         public MeshRenderer _meshRenderer;
+        [SerializeField]
+        private SkinnedMeshRenderer _polySurface1;
+        [SerializeField]
+        private Material _highlightMaterial;
 
-        [Space, Tooltip("Материалы щитов")]
+        [Space, Tooltip("Shield materials")]
         public Material _redMaterial;
         public Material _greenMaterial;
         public Material _blueMaterial;
+        public SoldierController _selectedSold;
 
-        //Корутина удара
         Coroutine _attack = null;
 
         private bool _inBattle = false;
@@ -183,10 +187,7 @@ namespace Ziggurat
 
         private void Arrival(Vector3 _destination)
         {
-            if (_enemy != null)
-            {
-                _destination = _enemy.transform.position;
-            }
+            if (_enemy != null) _destination = _enemy.transform.position;
 
             this.gameObject.transform.LookAt(_destination);
             var _distance = Vector3.Distance(this.transform.position, _destination);
@@ -296,6 +297,12 @@ namespace Ziggurat
                 _healthCanvas.gameObject.SetActive(true);
                 _healthSlider.value = _health/_maxHealth;
             }
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            _selectedSold = this;
+            _polySurface1.material = _highlightMaterial;
         }
     }
 }

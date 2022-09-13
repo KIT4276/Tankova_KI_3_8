@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace Ziggurat
@@ -9,6 +7,8 @@ namespace Ziggurat
     {
         [SerializeField]
         private GameObject _infoPanel;
+        [SerializeField]
+        private Button _healthButton;
 
         [SerializeField]
         private Text _aliveRed;
@@ -74,6 +74,8 @@ namespace Ziggurat
         {
             if (!_isShowingHealth) _isShowingHealth = true;
             else _isShowingHealth = false;
+
+            _healthButton.interactable = true;
         }
 
         private void FindAllAlive()
