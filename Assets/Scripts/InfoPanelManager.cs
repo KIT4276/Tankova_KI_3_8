@@ -50,9 +50,20 @@ namespace Ziggurat
 
         private void FindAllAlive()
         {
-            _aliveRed.text = FindObjectsOfType<RedSoldierController>().Length.ToString();
-            _aliveGreen.text = FindObjectsOfType<GreenSoldierController>().Length.ToString();
-            _aliveBlue.text = FindObjectsOfType<BlueSoldierController>().Length.ToString();
+            var soldiers = FindObjectsOfType<SoldierController>();
+            int r = 0;
+            int g = 0;
+            int b = 0;
+            foreach (var item in soldiers)
+            {
+                if (item._colorType == ColorType.Red) r++;
+                if (item._colorType == ColorType.Green) g++;
+                if (item._colorType == ColorType.Blue) b++;
+            }
+
+            _aliveRed.text = r.ToString();
+            _aliveGreen.text = g.ToString();
+            _aliveBlue.text = b.ToString();
         }
 
         #region Dead entry block

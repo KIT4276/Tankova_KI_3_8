@@ -37,8 +37,10 @@ namespace Ziggurat
         private Canvas _healthCanvas;
         [SerializeField] 
         private Slider _healthSlider;
+
         [Space, SerializeField]
         public MeshRenderer _meshRenderer;
+
         [Space, Tooltip("Материалы щитов")]
         public Material _redMaterial;
         public Material _greenMaterial;
@@ -80,8 +82,6 @@ namespace Ziggurat
         {
             if(_alertSphere.GetComponent<AttackSphereComponent>()._enemy != null) SwitchingToBattleMode();
             if (_destination == null) _destination = new Vector3(0f, 2f, 0f);
-
-            Debug.Log(_colorType);
         }
 
         private void LateUpdate()
@@ -90,6 +90,8 @@ namespace Ziggurat
             if (_isShowHP) ShowHealth();
             ReadingSettingFromConsole();
             CheckHealth();
+
+            Debug.Log(_colorType +" "+ _health);
         }
 
         public void ColorTypeDefinition()
@@ -121,8 +123,8 @@ namespace Ziggurat
                 ColorType enemyColor = _enemy.GetComponent<SoldierController>()._colorType;
 
                 
-                if ((enemyColor != this._colorType) && ((_enemy.GetComponent<BlueSoldierController>() != null) || 
-                    (_enemy.GetComponent<GreenSoldierController>() != null) || (_enemy.GetComponent<RedSoldierController>() != null)))
+                if ((enemyColor != this._colorType) && ((_enemy.GetComponent<SoldierController>()._colorType == ColorType.Blue) || 
+                    (_enemy.GetComponent<SoldierController>()._colorType == ColorType.Green) || (_enemy.GetComponent<SoldierController>()._colorType == ColorType.Red)))
                 {
                     if (_inBattle != true)
                     {
@@ -139,7 +141,7 @@ namespace Ziggurat
 
         private void ReadingSettingFromConsole()
         {
-            if (this.GetComponent<RedSoldierController>() != null)
+            if (this.GetComponent<SoldierController>()._colorType == ColorType.Red)
             {
                 _maxHealth = Settings._maxHealthRed;
                 _speed = Settings._speedRed;
@@ -150,7 +152,7 @@ namespace Ziggurat
                 _strongAttackProbability = Settings._strongAttackProbabilityRed;
             }
 
-            else if(this.GetComponent<GreenSoldierController>() != null)
+            else if(this.GetComponent<SoldierController>()._colorType == ColorType.Green)
             {
                 _maxHealth = Settings._maxHealthGreen;
                 _speed = Settings._speedGreen;
@@ -161,7 +163,7 @@ namespace Ziggurat
                 _strongAttackProbability = Settings._strongAttackProbabilityGreen;
             }
              
-            else if (this.GetComponent<BlueSoldierController>() != null )
+            else if (this.GetComponent<SoldierController>()._colorType == ColorType.Blue)
             {
                 _maxHealth = Settings._maxHealthBlue;
                 _speed = Settings._speedBlue;
@@ -276,9 +278,9 @@ namespace Ziggurat
         {
             this.gameObject.GetComponent<UnitEnvironment>().StartAnimation("Die");
 
-            if (this is RedSoldierController) InfoPanelManager.Self.SetKilledeRed();
-            if (this is GreenSoldierController) InfoPanelManager.Self.SetKilledeGreen();
-            if (this is BlueSoldierController) InfoPanelManager.Self.SetKilledeBlue();
+            if (this.GetComponent<SoldierController>()._colorType == ColorType.Red) InfoPanelManager.Self.SetKilledeRed();
+            if (this.GetComponent<SoldierController>()._colorType == ColorType.Green) InfoPanelManager.Self.SetKilledeGreen();
+            if (this.GetComponent<SoldierController>()._colorType == ColorType.Blue) InfoPanelManager.Self.SetKilledeBlue();
         }
 
         private bool DefinitionChanceStrongAttack()

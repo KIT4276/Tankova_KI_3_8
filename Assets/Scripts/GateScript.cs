@@ -24,12 +24,6 @@ namespace Ziggurat
             _redSoldier = Resources.Load<GameObject>(path);
             _greenSoldier = Resources.Load<GameObject>(path);
             _blueSoldier = Resources.Load<GameObject>(path);
-
-            //_redSoldier.GetComponent<SoldierController>()._colorType = ColorType.Red;
-
-            //_greenSoldier.GetComponent<SoldierController>()._colorType = ColorType.Green;
-
-            //_blueSoldier.GetComponent<SoldierController>()._colorType = ColorType.Blue;
         }
 
         protected IEnumerator CreatSoldier(ColorType сolorType, float respawnDelay, GameObject soldier, GameObject respawnPoint, Transform pool)
@@ -37,8 +31,8 @@ namespace Ziggurat
             while (true)
             {
                 yield return new WaitForSecondsRealtime(respawnDelay);
-                var r = Instantiate(soldier, respawnPoint.transform.position, Quaternion.identity, pool);
-                r.GetComponent<SoldierController>()._colorType = сolorType;
+                var newSolder = Instantiate(soldier, respawnPoint.transform.position, Quaternion.identity, pool);
+                newSolder.GetComponent<SoldierController>()._colorType = сolorType;
             }
         }
     }
