@@ -92,6 +92,7 @@ namespace Ziggurat
 
         public void SetHealthRed()
         {
+            Debug.Log("SetHealthRed");
             _maxHealthRed = _redHealthSlider.value;
         }
 
@@ -130,7 +131,7 @@ namespace Ziggurat
             _maxHealthGreen = _greenHealthSlider.value;
         }
 
-        public void SetSpeedreen()
+        public void SetSpeedGreen()
         {
             _speedGreen = _greenSpeedSlider.value;
         }

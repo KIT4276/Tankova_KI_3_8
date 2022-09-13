@@ -57,7 +57,7 @@ namespace Ziggurat
             _controls = new Ziggurat.Controls();
             _controls.Camera.Select.performed += OnLeftClic;
             _zeroPosition = _greenPanel.GetComponent<RectTransform>().transform.position;
-            _finitePosition = new Vector2(202, 470);
+            _finitePosition = new Vector2(202, 400);
             _zeroInfoPosition = _infoPanel.GetComponent<RectTransform>().transform.position;
             _finiteInfoPosition = new Vector2(1100, _infoPanel.transform.position.y);
         }
@@ -149,6 +149,7 @@ namespace Ziggurat
             }
             _activePanel.GetComponent<RectTransform>().transform.position = targetToMove;
         }
+
 
         private void OnEnable() => _controls.Camera.Enable();
 
