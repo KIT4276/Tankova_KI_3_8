@@ -81,8 +81,6 @@ namespace Ziggurat
         {
             if(_alertSphere.GetComponent<AttackSphereComponent>()._enemy != null) SwitchingToBattleMode();
             if (_destination == null) _destination = new Vector3(0f, 2f, 0f);
-
-            Debug.Log(_health);
         }
 
         private void LateUpdate()
@@ -91,8 +89,6 @@ namespace Ziggurat
             if (_isShowHP) ShowHealth();
             ReadingSettingFromConsole();
             CheckHealth();
-
-            Debug.Log(_colorType +" "+ _health);
         }
 
         public void ColorTypeDefinition()

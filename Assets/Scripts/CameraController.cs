@@ -19,7 +19,7 @@ namespace Ziggurat
 
         private void Awake()
         {
-            _controls = new Ziggurat.Controls();
+            _controls = new Controls();
             _controls.Camera.ActivateRotation.performed += OnActivateRotation;
             _controls.Camera.ActivateRotation.canceled += OnActivateRotation;
         }

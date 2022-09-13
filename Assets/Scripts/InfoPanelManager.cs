@@ -5,8 +5,11 @@ using UnityEngine.UI;
 
 namespace Ziggurat
 {
-    public class InfoPanelManager : MonoBehaviour
+    public class InfoPanelManager : BasePanelManager
     {
+        [SerializeField]
+        private GameObject _infoPanel;
+
         [SerializeField]
         private Text _aliveRed;
         [SerializeField]
@@ -25,19 +28,44 @@ namespace Ziggurat
         private int killedGreen;
         private int killedBlue;
 
+        private Vector2 _zeroInfoPosition;
+        private Vector2 _finiteInfoPosition;
+
         private bool _isShowingHealth = false;
 
         public static InfoPanelManager Self;
 
         private void Start()
         {
+            _controls = new Controls();
+            
             Self = this;
+
+            _zeroInfoPosition = _infoPanel.GetComponent<RectTransform>().transform.position;
+            _finiteInfoPosition = new Vector2(_zeroInfoPosition.x - 300, _zeroInfoPosition.y);
         }
 
         private void LateUpdate()
         {
             FindAllAlive();
             SetAllKilled();
+        }
+
+        public void OpenInfoPanel()
+        {
+            
+            if (_panelIsOpened) CloseInfoPanel();
+            else
+            {
+                StartCoroutine(MoveFromTo(_finiteInfoPosition, _infoPanel));
+                _panelIsOpened = true;
+            }
+        }
+
+        public void CloseInfoPanel()
+        {
+            StartCoroutine(MoveFromTo(_zeroInfoPosition, _infoPanel));
+            _panelIsOpened = false;
         }
 
         public bool IsShowingHealth() => _isShowingHealth;
