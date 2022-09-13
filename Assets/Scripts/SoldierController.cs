@@ -14,27 +14,35 @@ namespace Ziggurat
 
     public class SoldierController : MonoBehaviour
     {
-        protected Vector3 _destination;
+        protected Vector3 _destination = new Vector3(0,2,0);
         protected GameObject _enemy = null;
         private GameObject _gameManager;
         private GameObject _alertSphere = null;
         private bool _isShowHP = false;
 
-        protected float _health = 100f;
+        protected float _maxHealth = 15f;
+        protected float _health;
         private float _speed = 5f;
         private float _fastDamage = 3f;
         private float _strongDamage = 6f;
         private float _missProbability = 0.2f;
         private float _critProbability = 0.1f;
         private float _strongAttackProbability = 0.2f;
-        private ColorType _colorType;
+        public ColorType _colorType;
         private ColorType _unfriendlyColor1;
         private ColorType _unfriendlyColor2;
+
 
         [SerializeField] 
         private Canvas _healthCanvas;
         [SerializeField] 
         private Slider _healthSlider;
+        [Space, SerializeField]
+        public MeshRenderer _meshRenderer;
+        [Space, Tooltip("Материалы щитов")]
+        public Material _redMaterial;
+        public Material _greenMaterial;
+        public Material _blueMaterial;
 
         //Корутина удара
         Coroutine _attack = null;
@@ -43,18 +51,37 @@ namespace Ziggurat
 
         private void Awake()
         {
-            //_camera = Camera.main;
             _alertSphere = this.transform.Find("Sphere").gameObject;
-            _colorType = ColorTypeDefinition();
-            
+            ColorTypeDefinition();
+            _health = _maxHealth;
+
             ReadingSettingFromConsole();
             StartCoroutine(Move());
+        }
+        private void Start()
+        {
+            switch (_colorType)
+            {
+                case ColorType.Red:
+                    _meshRenderer.material = _redMaterial;
+                    break;
+                case ColorType.Green:
+                    _meshRenderer.material = _greenMaterial;
+                    break;
+                case ColorType.Blue:
+                    _meshRenderer.material = _blueMaterial;
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void Update()
         {
             if(_alertSphere.GetComponent<AttackSphereComponent>()._enemy != null) SwitchingToBattleMode();
             if (_destination == null) _destination = new Vector3(0f, 2f, 0f);
+
+            Debug.Log(_colorType);
         }
 
         private void LateUpdate()
@@ -65,28 +92,25 @@ namespace Ziggurat
             CheckHealth();
         }
 
-        public ColorType ColorTypeDefinition()
+        public void ColorTypeDefinition()
         {
-            if (this.GetComponent<RedSoldierController>() != null)
+            switch (_colorType)
             {
-                _colorType = ColorType.Red;
-                _unfriendlyColor1 = ColorType.Green;
-                _unfriendlyColor2 = ColorType.Blue;
+                case ColorType.Red:
+                    _unfriendlyColor1 = ColorType.Green;
+                    _unfriendlyColor2 = ColorType.Blue;
+                    break;
+                case ColorType.Green:
+                    _unfriendlyColor1 = ColorType.Red;
+                    _unfriendlyColor2 = ColorType.Blue;
+                    break;
+                case ColorType.Blue:
+                    _unfriendlyColor1 = ColorType.Green;
+                    _unfriendlyColor2 = ColorType.Red;
+                    break;
+                default:
+                    break;
             }
-            if (this.GetComponent<GreenSoldierController>() != null)
-            {
-                _colorType = ColorType.Green;
-                _unfriendlyColor1 = ColorType.Red;
-                _unfriendlyColor2 = ColorType.Blue;
-            }
-            if (this.GetComponent<BlueSoldierController>() != null)
-            {
-                _colorType = ColorType.Blue;
-                _unfriendlyColor1 = ColorType.Green;
-                _unfriendlyColor2 = ColorType.Red;
-            }
-
-            return _colorType;
         }
 
         private void SwitchingToBattleMode() 
@@ -94,7 +118,7 @@ namespace Ziggurat
             if (_enemy == null) 
             {
                 _enemy = _alertSphere.GetComponent<AttackSphereComponent>()._enemy;
-                ColorType enemyColor = _enemy.GetComponent<SoldierController>().ColorTypeDefinition();
+                ColorType enemyColor = _enemy.GetComponent<SoldierController>()._colorType;
 
                 
                 if ((enemyColor != this._colorType) && ((_enemy.GetComponent<BlueSoldierController>() != null) || 
@@ -115,10 +139,9 @@ namespace Ziggurat
 
         private void ReadingSettingFromConsole()
         {
-
             if (this.GetComponent<RedSoldierController>() != null)
             {
-                _health = Settings._healthRed;
+                _maxHealth = Settings._maxHealthRed;
                 _speed = Settings._speedRed;
                 _fastDamage = Settings._fastDamageRed;
                 _strongDamage = Settings._strongDamageRed;
@@ -129,7 +152,7 @@ namespace Ziggurat
 
             else if(this.GetComponent<GreenSoldierController>() != null)
             {
-                _health = Settings._healthGreen;
+                _maxHealth = Settings._maxHealthGreen;
                 _speed = Settings._speedGreen;
                 _fastDamage = Settings._fastDamageGreen;
                 _strongDamage = Settings._strongDamageGreen;
@@ -140,7 +163,7 @@ namespace Ziggurat
              
             else if (this.GetComponent<BlueSoldierController>() != null )
             {
-                _health = Settings._healthBlue;
+                _maxHealth = Settings._maxHealthBlue;
                 _speed = Settings._speedBlue;
                 _fastDamage = Settings._fastDamageBlue;
                 _strongDamage = Settings._strongDamageBlue;
@@ -272,7 +295,7 @@ namespace Ziggurat
             {
                 _healthCanvas.transform.LookAt(Camera.main.transform.position);
                 _healthCanvas.gameObject.SetActive(true);
-                _healthSlider.value = _health;
+                _healthSlider.value = _health/_maxHealth;
             }
         }
     }

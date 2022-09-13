@@ -11,12 +11,12 @@ namespace Ziggurat
         private void OnTriggerEnter(Collider _collider)
         {
             if (_collider.gameObject.GetComponent<SoldierController>() != null && 
-                EnemyCheck(_collider.gameObject.GetComponent<SoldierController>().ColorTypeDefinition()))
+                EnemyCheck(_collider.gameObject.GetComponent<SoldierController>()._colorType))
                 _enemy = _collider.gameObject;
         }
         private bool EnemyCheck(ColorType colliderColorType)
         {
-            if(colliderColorType != transform.parent.gameObject.GetComponent<SoldierController>().ColorTypeDefinition())
+            if(colliderColorType != transform.parent.gameObject.GetComponent<SoldierController>()._colorType)
                  return true;
             else return false;
         }

@@ -6,9 +6,9 @@ namespace Ziggurat
 {
     public class RedSoldierController : SoldierController
     {
-        private void Start()
-        {
-            _destination = new Vector3(0, 2, 4);
-        }
+        //private void Start()
+        //{
+        //    _destination = new Vector3(0, 2, 4);
+        //}
     }
 }

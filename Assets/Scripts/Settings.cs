@@ -10,7 +10,7 @@ namespace Ziggurat
         #region Parametrs
 
         //Red
-        public static float _healthRed = 30f;
+        public static float _maxHealthRed = 15f;
         public static float _speedRed = 3f;
         public static float _fastDamageRed = 3f;
         public static float _strongDamageRed = 6f;
@@ -19,7 +19,7 @@ namespace Ziggurat
         public static float _strongAttackProbabilityRed = 0.2f;
 
         //Green
-        public static float _healthGreen = 30f;
+        public static float _maxHealthGreen = 15f;
         public static float _speedGreen = 3f;
         public static float _fastDamageGreen = 3f;
         public static float _strongDamageGreen = 6f;
@@ -28,7 +28,7 @@ namespace Ziggurat
         public static float _strongAttackProbabilityGreen = 0.2f;
 
         //Blue
-        public static float _healthBlue = 30f;
+        public static float _maxHealthBlue = 15f;
         public static float _speedBlue = 3f;
         public static float _fastDamageBlue = 3f;
         public static float _strongDamageBlue = 6f;
@@ -92,7 +92,7 @@ namespace Ziggurat
 
         public void SetHealthRed()
         {
-            _healthRed = _redHealthSlider.value;
+            _maxHealthRed = _redHealthSlider.value;
         }
 
         public void SetSpeedRed()
@@ -127,7 +127,7 @@ namespace Ziggurat
         
         public void SetHealthGreen()
         {
-            _healthGreen = _greenHealthSlider.value;
+            _maxHealthGreen = _greenHealthSlider.value;
         }
 
         public void SetSpeedreen()
@@ -163,7 +163,7 @@ namespace Ziggurat
 
         public void SetHealthBlue()
         {
-            _healthBlue = _blueHealthSlider.value;
+            _maxHealthBlue = _blueHealthSlider.value;
         }
 
         public void SetSpeedBlue()
